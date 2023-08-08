@@ -206,57 +206,6 @@ async function createOrUpdateWorkflow(user, access_token, repository, filePath, 
         const { data: existingFile } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
             owner: user,
             repo: repository,
-            path: filePath,
-        })
-        console.log("File exists", existingFile.sha);
-        await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
-            owner: user,
-            repo: repository,
-            path: filePath,
-            message: 'updated workflow',
-            committer: {
-                name: 'Team Last Minute',
-                email: 'lastmin@gmail.com'
-            },
-            headers: {
-                authorization: access_token,
-            },
-            content: 'bmFtZTogQXJkcml2ZSBXb3JrZmxvdwpvbjogW3B1c2hdCmVudjoKICAjIFNldHRpbmcgYW4gZW52aXJvbm1lbnQgdmFyaWFibGUgd2l0aCB0aGUgdmFsdWUgb2YgYSBjb25maWd1cmF0aW9uIHZhcmlhYmxlCiAgZW52X3ZhcjogJHt7IHZhcnMuRU5WX0NPTlRFWFRfVkFSIH19CiAgCmpvYnM6CiAgYnVpbGQ6CiAgICBydW5zLW9uOiB1YnVudHUtbGF0ZXN0CiAgICBzdGVwczoKICAgICAgLSB1c2VzOiBhY3Rpb25zL2NoZWNrb3V0QHYzCiAgICAgIC0gbmFtZTogU2V0IHVwIE5vZGUKICAgICAgICB1c2VzOiBhY3Rpb25zL3NldHVwLW5vZGVAdjMKICAgICAgICB3aXRoOgogICAgICAgICAgbm9kZS12ZXJzaW9uOiAnMTgnCiAgICAgICAgICAKICAgICAgLSBuYW1lOiBTZXQgdXAgUHl0aG9uCiAgICAgICAgdXNlczogYWN0aW9ucy9zZXR1cC1weXRob25AdjIKICAgICAgICB3aXRoOgogICAgICAgICAgcHl0aG9uLXZlcnNpb246ICczLjEwJwoKICAgICAgIyAtIG5hbWU6IEluc3RhbGwgRGVwZW5kZW5jaWVzCiAgICAgICMgICBydW46IHwKICAgICAgIyAgICBucG0gaW5zdGFsbCAtZyBhcmRyaXZlLWNsaSAtLXNpbGVudAogICAgICAjICAgIGVjaG8gIlN1Y2Nlc3NmdWxseSBJbnN0YWxsZWQgYXJkcml2ZS1jbGkiCgogICAgICAjIC0gbmFtZTogQnVpbGQgdGhlIHdlYnNpdGUKICAgICAgIyAgIHJ1bjogfAogICAgICAjICAgIG5wbSBpbnN0YWxsIC0tc2lsZW50CiAgICAgICMgcHl0aG9uIGFyc3luY19zY3JpcHQucHkgLXcgd2FsbGV0Lmpzb24gLWQgJHt7IHZhcnMuRFJJVkVfSUR9fSAtYiAke3sgdmFycy5CVUlMRF9FWFBPUlRfTkFNRX19ID4+IGxvZy50eHQKICAgICAgIyAgICBucG0gcnVuIGJ1aWxkIC0tc2lsZW50CgogICAgICAtIG5hbWU6IFVwbG9hZGluZyB0byBhcmRyaXZlCiAgICAgICAgcnVuOiB8CiAgICAgICAgICBlY2hvICR7eyB2YXJzLldBTExFVF9KU09OfX0gfCBiYXNlNjQgLWQgPiB3YWxsZXQuanNvbgogICAgICAgICAgZWNobyAibGlua3RvLndlYnNpdGUiID4+IGxvZy50eHQKICAgICAgICAgIGdoIGF1dGggbG9naW4gLS13aXRoLXRva2VuIDw8PCAke3sgdmFycy5HX1RPS0VOIH19CiAgICAgICAgICBnaCByZXBvIGVkaXQgJHt7IGdpdGh1Yi5yZXBvc2l0b3J5IH19IC0tZGVzY3JpcHRpb24gIiQoY2F0IGxvZy50eHQpIgogICAgICAgICAgZWNobyAiUGxlYXNlIG5hdmlnYXRlIHRvIHRoZSBsaW5rIGZyb20gZGVzY3JpcHRpb24gdG8gYWNjZXNzIHlvdSBkZWNlbnRyYWxpemVkIHdlYnNpdGUhIg==',
-            sha: existingFile.sha,
-        }).then((err) => {
-            console.log(err);
-        })
-
-        console.log(`File is updated successfully!`);
-
-    }
-    //if file doesn't exist
-    catch (error) {
-        console.log(`File not found! Created a new file.`);
-        try {
-            const response = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
-                owner: user,
-                repo: repository,
-                path: filePath,
-                message: 'Added workflow by arsync',
-                committer: {
-                    name: 'Team Last Minute',
-                    email: 'lastmin@gmail.com'
-                },
-                content: 'bmFtZTogQXJkcml2ZSBXb3JrZmxvdwpvbjogW3B1c2hdCmVudjoKICAjIFNldHRpbmcgYW4gZW52aXJvbm1lbnQgdmFyaWFibGUgd2l0aCB0aGUgdmFsdWUgb2YgYSBjb25maWd1cmF0aW9uIHZhcmlhYmxlCiAgZW52X3ZhcjogJHt7IHZhcnMuRU5WX0NPTlRFWFRfVkFSIH19CiAgCmpvYnM6CiAgYnVpbGQ6CiAgICBydW5zLW9uOiB1YnVudHUtbGF0ZXN0CiAgICBzdGVwczoKICAgICAgLSB1c2VzOiBhY3Rpb25zL2NoZWNrb3V0QHYzCiAgICAgIC0gbmFtZTogU2V0IHVwIE5vZGUKICAgICAgICB1c2VzOiBhY3Rpb25zL3NldHVwLW5vZGVAdjMKICAgICAgICB3aXRoOgogICAgICAgICAgbm9kZS12ZXJzaW9uOiAnMTgnCiAgICAgICAgICAKICAgICAgLSBuYW1lOiBTZXQgdXAgUHl0aG9uCiAgICAgICAgdXNlczogYWN0aW9ucy9zZXR1cC1weXRob25AdjIKICAgICAgICB3aXRoOgogICAgICAgICAgcHl0aG9uLXZlcnNpb246ICczLjEwJwoKICAgICAgIyAtIG5hbWU6IEluc3RhbGwgRGVwZW5kZW5jaWVzCiAgICAgICMgICBydW46IHwKICAgICAgIyAgICBucG0gaW5zdGFsbCAtZyBhcmRyaXZlLWNsaSAtLXNpbGVudAogICAgICAjICAgIGVjaG8gIlN1Y2Nlc3NmdWxseSBJbnN0YWxsZWQgYXJkcml2ZS1jbGkiCgogICAgICAjIC0gbmFtZTogQnVpbGQgdGhlIHdlYnNpdGUKICAgICAgIyAgIHJ1bjogfAogICAgICAjICAgIG5wbSBpbnN0YWxsIC0tc2lsZW50CiAgICAgICMgcHl0aG9uIGFyc3luY19zY3JpcHQucHkgLXcgd2FsbGV0Lmpzb24gLWQgJHt7IHZhcnMuRFJJVkVfSUR9fSAtYiAke3sgdmFycy5CVUlMRF9FWFBPUlRfTkFNRX19ID4+IGxvZy50eHQKICAgICAgIyAgICBucG0gcnVuIGJ1aWxkIC0tc2lsZW50CgogICAgICAtIG5hbWU6IFVwbG9hZGluZyB0byBhcmRyaXZlCiAgICAgICAgcnVuOiB8CiAgICAgICAgICBlY2hvICR7eyB2YXJzLldBTExFVF9KU09OfX0gfCBiYXNlNjQgLWQgPiB3YWxsZXQuanNvbgogICAgICAgICAgZWNobyAibGlua3RvLndlYnNpdGUiID4+IGxvZy50eHQKICAgICAgICAgIGdoIGF1dGggbG9naW4gLS13aXRoLXRva2VuIDw8PCAke3sgdmFycy5HX1RPS0VOIH19CiAgICAgICAgICBnaCByZXBvIGVkaXQgJHt7IGdpdGh1Yi5yZXBvc2l0b3J5IH19IC0tZGVzY3JpcHRpb24gIiQoY2F0IGxvZy50eHQpIgogICAgICAgICAgZWNobyAiUGxlYXNlIG5hdmlnYXRlIHRvIHRoZSBsaW5rIGZyb20gZGVzY3JpcHRpb24gdG8gYWNjZXNzIHlvdSBkZWNlbnRyYWxpemVkIHdlYnNpdGUhIg=='
-                , headers: {
-                    authorization: access_token,
-                }
-            })
-        } catch (err) {
-            console.log("my name is khan but you can call me error :)", err);
-        }
-    }
-    try {
-        // Checking for file
-        const { data: existingFile } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
-            owner: user,
-            repo: repository,
             path: scriptFilePath,
         })
         console.log("script exists", existingFile.sha);
@@ -301,6 +250,57 @@ async function createOrUpdateWorkflow(user, access_token, repository, filePath, 
                 console.log(err);
             })
             console.log("script created successfully!");
+        } catch (err) {
+            console.log("my name is khan but you can call me error :)", err);
+        }
+    }
+    try {
+        // Checking for file
+        const { data: existingFile } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
+            owner: user,
+            repo: repository,
+            path: filePath,
+        })
+        console.log("File exists", existingFile.sha);
+        await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+            owner: user,
+            repo: repository,
+            path: filePath,
+            message: 'updated workflow',
+            committer: {
+                name: 'Team Last Minute',
+                email: 'lastmin@gmail.com'
+            },
+            headers: {
+                authorization: access_token,
+            },
+            content: 'bmFtZTogQXJkcml2ZSBXb3JrZmxvdwpvbjogW3B1c2hdCmVudjoKICAjIFNldHRpbmcgYW4gZW52aXJvbm1lbnQgdmFyaWFibGUgd2l0aCB0aGUgdmFsdWUgb2YgYSBjb25maWd1cmF0aW9uIHZhcmlhYmxlCiAgZW52X3ZhcjogJHt7IHZhcnMuRU5WX0NPTlRFWFRfVkFSIH19CiAgCmpvYnM6CiAgYnVpbGQ6CiAgICBydW5zLW9uOiB1YnVudHUtbGF0ZXN0CiAgICBzdGVwczoKICAgICAgLSB1c2VzOiBhY3Rpb25zL2NoZWNrb3V0QHYzCiAgICAgIC0gbmFtZTogU2V0IHVwIE5vZGUKICAgICAgICB1c2VzOiBhY3Rpb25zL3NldHVwLW5vZGVAdjMKICAgICAgICB3aXRoOgogICAgICAgICAgbm9kZS12ZXJzaW9uOiAnMTgnCiAgICAgICAgICAKICAgICAgLSBuYW1lOiBTZXQgdXAgUHl0aG9uCiAgICAgICAgdXNlczogYWN0aW9ucy9zZXR1cC1weXRob25AdjIKICAgICAgICB3aXRoOgogICAgICAgICAgcHl0aG9uLXZlcnNpb246ICczLjEwJwoKICAgICAgIyAtIG5hbWU6IEluc3RhbGwgRGVwZW5kZW5jaWVzCiAgICAgICMgICBydW46IHwKICAgICAgIyAgICBucG0gaW5zdGFsbCAtZyBhcmRyaXZlLWNsaSAtLXNpbGVudAogICAgICAjICAgIGVjaG8gIlN1Y2Nlc3NmdWxseSBJbnN0YWxsZWQgYXJkcml2ZS1jbGkiCgogICAgICAjIC0gbmFtZTogQnVpbGQgdGhlIHdlYnNpdGUKICAgICAgIyAgIHJ1bjogfAogICAgICAjICAgIG5wbSBpbnN0YWxsIC0tc2lsZW50CiAgICAgICMgcHl0aG9uIGFyc3luY19zY3JpcHQucHkgLXcgd2FsbGV0Lmpzb24gLWQgJHt7IHZhcnMuRFJJVkVfSUR9fSAtYiAke3sgdmFycy5CVUlMRF9FWFBPUlRfTkFNRX19ID4+IGxvZy50eHQKICAgICAgIyAgICBucG0gcnVuIGJ1aWxkIC0tc2lsZW50CgogICAgICAtIG5hbWU6IFVwbG9hZGluZyB0byBhcmRyaXZlCiAgICAgICAgcnVuOiB8CiAgICAgICAgICBlY2hvICR7eyB2YXJzLldBTExFVF9KU09OfX0gfCBiYXNlNjQgLWQgPiB3YWxsZXQuanNvbgogICAgICAgICAgZWNobyAibGlua3RvLndlYnNpdGUiID4+IGxvZy50eHQKICAgICAgICAgIGdoIGF1dGggbG9naW4gLS13aXRoLXRva2VuIDw8PCAke3sgdmFycy5HX1RPS0VOIH19CiAgICAgICAgICBnaCByZXBvIGVkaXQgJHt7IGdpdGh1Yi5yZXBvc2l0b3J5IH19IC0tZGVzY3JpcHRpb24gIiQoY2F0IGxvZy50eHQpIgogICAgICAgICAgZWNobyAiUGxlYXNlIG5hdmlnYXRlIHRvIHRoZSBsaW5rIGZyb20gZGVzY3JpcHRpb24gdG8gYWNjZXNzIHlvdSBkZWNlbnRyYWxpemVkIHdlYnNpdGUhIg==',
+            sha: existingFile.sha,
+        }).then((err) => {
+            console.log(err);
+        })
+
+        console.log(`File is updated successfully!`);
+
+    }
+    //if file doesn't exist
+    catch (error) {
+        console.log(`File not found! Created a new file.`);
+        try {
+            const response = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+                owner: user,
+                repo: repository,
+                path: filePath,
+                message: 'Added workflow by arsync',
+                committer: {
+                    name: 'Team Last Minute',
+                    email: 'lastmin@gmail.com'
+                },
+                content: 'bmFtZTogQXJkcml2ZSBXb3JrZmxvdwpvbjogW3B1c2hdCmVudjoKICAjIFNldHRpbmcgYW4gZW52aXJvbm1lbnQgdmFyaWFibGUgd2l0aCB0aGUgdmFsdWUgb2YgYSBjb25maWd1cmF0aW9uIHZhcmlhYmxlCiAgZW52X3ZhcjogJHt7IHZhcnMuRU5WX0NPTlRFWFRfVkFSIH19CiAgCmpvYnM6CiAgYnVpbGQ6CiAgICBydW5zLW9uOiB1YnVudHUtbGF0ZXN0CiAgICBzdGVwczoKICAgICAgLSB1c2VzOiBhY3Rpb25zL2NoZWNrb3V0QHYzCiAgICAgIC0gbmFtZTogU2V0IHVwIE5vZGUKICAgICAgICB1c2VzOiBhY3Rpb25zL3NldHVwLW5vZGVAdjMKICAgICAgICB3aXRoOgogICAgICAgICAgbm9kZS12ZXJzaW9uOiAnMTgnCiAgICAgICAgICAKICAgICAgLSBuYW1lOiBTZXQgdXAgUHl0aG9uCiAgICAgICAgdXNlczogYWN0aW9ucy9zZXR1cC1weXRob25AdjIKICAgICAgICB3aXRoOgogICAgICAgICAgcHl0aG9uLXZlcnNpb246ICczLjEwJwoKICAgICAgIyAtIG5hbWU6IEluc3RhbGwgRGVwZW5kZW5jaWVzCiAgICAgICMgICBydW46IHwKICAgICAgIyAgICBucG0gaW5zdGFsbCAtZyBhcmRyaXZlLWNsaSAtLXNpbGVudAogICAgICAjICAgIGVjaG8gIlN1Y2Nlc3NmdWxseSBJbnN0YWxsZWQgYXJkcml2ZS1jbGkiCgogICAgICAjIC0gbmFtZTogQnVpbGQgdGhlIHdlYnNpdGUKICAgICAgIyAgIHJ1bjogfAogICAgICAjICAgIG5wbSBpbnN0YWxsIC0tc2lsZW50CiAgICAgICMgcHl0aG9uIGFyc3luY19zY3JpcHQucHkgLXcgd2FsbGV0Lmpzb24gLWQgJHt7IHZhcnMuRFJJVkVfSUR9fSAtYiAke3sgdmFycy5CVUlMRF9FWFBPUlRfTkFNRX19ID4+IGxvZy50eHQKICAgICAgIyAgICBucG0gcnVuIGJ1aWxkIC0tc2lsZW50CgogICAgICAtIG5hbWU6IFVwbG9hZGluZyB0byBhcmRyaXZlCiAgICAgICAgcnVuOiB8CiAgICAgICAgICBlY2hvICR7eyB2YXJzLldBTExFVF9KU09OfX0gfCBiYXNlNjQgLWQgPiB3YWxsZXQuanNvbgogICAgICAgICAgZWNobyAibGlua3RvLndlYnNpdGUiID4+IGxvZy50eHQKICAgICAgICAgIGdoIGF1dGggbG9naW4gLS13aXRoLXRva2VuIDw8PCAke3sgdmFycy5HX1RPS0VOIH19CiAgICAgICAgICBnaCByZXBvIGVkaXQgJHt7IGdpdGh1Yi5yZXBvc2l0b3J5IH19IC0tZGVzY3JpcHRpb24gIiQoY2F0IGxvZy50eHQpIgogICAgICAgICAgZWNobyAiUGxlYXNlIG5hdmlnYXRlIHRvIHRoZSBsaW5rIGZyb20gZGVzY3JpcHRpb24gdG8gYWNjZXNzIHlvdSBkZWNlbnRyYWxpemVkIHdlYnNpdGUhIg=='
+                , headers: {
+                    authorization: access_token,
+                }
+            })
         } catch (err) {
             console.log("my name is khan but you can call me error :)", err);
         }
