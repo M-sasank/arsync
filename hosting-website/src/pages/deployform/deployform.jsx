@@ -34,14 +34,16 @@ const DeployForm = (props) => {
   const deployProject = async () => {
     setIsLoading(true);
     try {
-      const workflow = await fetch('https://arweave-hackathon-jashwanth0712.vercel.app/addWorkflow', {
-          method: 'GET',
-          headers: {
-              username: localStorage.getItem("username"),
-              access_token: localStorage.getItem("accessToken"),
-              repository: location.state.repo,
-          }
-      })
+      const workflow = await fetch('http://localhost:3000/addWorkflow', {
+        method: 'GET',
+        headers: {
+          username: localStorage.getItem("username"),
+          access_token: localStorage.getItem("accessToken"),
+          repository: location.state.repo,
+        }
+      }).catch((error) => {
+        console.log("This is error: ", error);
+      });
       setIsLoading(false);
       navigate('/success')
       // console.log("This is reponse data from addWorkflow", workflow);
@@ -57,8 +59,8 @@ const DeployForm = (props) => {
 
       <div className='flex items-baseline justify-between'>
         <div className="mt-10">
-            <p className="text-4xl font-bold text-white">You're almost done.</p>
-            <p className="text-base text-[var(--text-secondary)] mt-1">Please follow the steps to configure your Project and deploy it.</p>
+          <p className="text-4xl font-bold text-white">You're almost done.</p>
+          <p className="text-base text-[var(--text-secondary)] mt-1">Please follow the steps to configure your Project and deploy it.</p>
         </div>
 
         <div className='flex items-center gap-2 bg-[var(--primary-dark)] py-5 px-12 h-fit rounded-lg'>
@@ -71,28 +73,28 @@ const DeployForm = (props) => {
         <p className="text-2xl font-semibold">Configure Project</p>
         <hr className='border-[var(--primary-dark)] my-5' />
         <form onSubmit={handleSubmit}>
-            <label htmlFor="projectName" className='text-xs text-[var(--text-secondary)]'>Project Name</label>
-            <input type="text" id="projectName" className='text-sm placeholder-[var(--primary-light)]' defaultValue={projectName} onChange={(e) => setProjectName(e.target.value)} required />
-            
-            <label htmlFor="framework" className='text-xs text-[var(--text-secondary)] mt-5'>Framework</label>
-            <input type="text" id="framework" className='text-sm placeholder-[var(--primary-light)]' value={framework} placeholder='Other' onChange={(e) => setFramework(e.target.value)} required />
+          <label htmlFor="projectName" className='text-xs text-[var(--text-secondary)]'>Project Name</label>
+          <input type="text" id="projectName" className='text-sm placeholder-[var(--primary-light)]' defaultValue={projectName} onChange={(e) => setProjectName(e.target.value)} required />
 
-            <label htmlFor="rootDirectory" className='text-xs text-[var(--text-secondary)] mt-5'>Root Directory</label>
-            <input type="text" id="rootDirectory" className='text-sm placeholder-[var(--primary-light)]' value={rootDirectory} placeholder='./' onChange={(e) => setRootDirectory(e.target.value)} required />
+          <label htmlFor="framework" className='text-xs text-[var(--text-secondary)] mt-5'>Framework</label>
+          <input type="text" id="framework" className='text-sm placeholder-[var(--primary-light)]' value={framework} placeholder='Other' onChange={(e) => setFramework(e.target.value)} required />
+
+          <label htmlFor="rootDirectory" className='text-xs text-[var(--text-secondary)] mt-5'>Root Directory</label>
+          <input type="text" id="rootDirectory" className='text-sm placeholder-[var(--primary-light)]' value={rootDirectory} placeholder='./' onChange={(e) => setRootDirectory(e.target.value)} required />
 
 
-            <label htmlFor="buildSettings" className='text-base font-medium text-[var(--text-secondary)] mt-8'>Build and Output Settings</label>
-            
-            <label htmlFor="buildCommand" className='text-xs text-[var(--text-secondary)] mt-2'>Build Command</label>
-            <input type="text" id="buildCommand" className='text-sm placeholder-[var(--primary-light)]' value={buildCommand} placeholder='`npm run build` or `npm run ar-build`' onChange={(e) => setBuildCommand(e.target.value)} required />
+          <label htmlFor="buildSettings" className='text-base font-medium text-[var(--text-secondary)] mt-8'>Build and Output Settings</label>
 
-            <label htmlFor="outputDirectory" className='text-xs text-[var(--text-secondary)] mt-5'>Output Directory</label>
-            <input type="text" id="outputDirectory" className='text-sm placeholder-[var(--primary-light)]' value={outputDirectory} placeholder='`public` if it exists, or `.`' onChange={(e) => setOutputDirectory(e.target.value)} required />
+          <label htmlFor="buildCommand" className='text-xs text-[var(--text-secondary)] mt-2'>Build Command</label>
+          <input type="text" id="buildCommand" className='text-sm placeholder-[var(--primary-light)]' value={buildCommand} placeholder='`npm run build` or `npm run ar-build`' onChange={(e) => setBuildCommand(e.target.value)} required />
 
-            <label htmlFor="installCommand" className='text-xs text-[var(--text-secondary)] mt-5'>Install Command</label>
-            <input type="text" id="installCommand" className='text-sm placeholder-[var(--primary-light)]' value={installCommand} placeholder='`yarn install`, `pnpm install`, or `npm install`' onChange={(e) => setInstallCommand(e.target.value)} required />
-            
-            <button type="submit" className='btn hover:brightness-90 transition-all duration-150 ease-in-out' style={{ backgroundColor: 'white', color: 'black', padding: '9px 15px', border: 'none', borderRadius: '8px', cursor: 'pointer' }}> Deploy </button> 
+          <label htmlFor="outputDirectory" className='text-xs text-[var(--text-secondary)] mt-5'>Output Directory</label>
+          <input type="text" id="outputDirectory" className='text-sm placeholder-[var(--primary-light)]' value={outputDirectory} placeholder='`public` if it exists, or `.`' onChange={(e) => setOutputDirectory(e.target.value)} required />
+
+          <label htmlFor="installCommand" className='text-xs text-[var(--text-secondary)] mt-5'>Install Command</label>
+          <input type="text" id="installCommand" className='text-sm placeholder-[var(--primary-light)]' value={installCommand} placeholder='`yarn install`, `pnpm install`, or `npm install`' onChange={(e) => setInstallCommand(e.target.value)} required />
+
+          <button type="submit" className='btn hover:brightness-90 transition-all duration-150 ease-in-out' style={{ backgroundColor: 'white', color: 'black', padding: '9px 15px', border: 'none', borderRadius: '8px', cursor: 'pointer' }}> Deploy </button>
         </form>
       </div>
     </>

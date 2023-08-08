@@ -14,7 +14,7 @@ export default function Navbar() {
 
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
-        window.location.href = "https://arsync.vercel.app/";
+        window.location.href = "http://localhost:5173/";
     }
 
     // function storeUserData() {
@@ -23,13 +23,13 @@ export default function Navbar() {
     // }
 
     useEffect(() => {
-        if(localStorage.getItem("accessToken")) {
+        if (localStorage.getItem("accessToken")) {
             getUserData();
         }
     }, []);
 
     async function getUserData() {
-        await fetch('https://arweave-hackathon-jashwanth0712.vercel.app/getUserData', {
+        await fetch('http://localhost:3000/getUserData', {
             method: 'GET',
             headers: {
                 "Authorization": "token " + localStorage.getItem("accessToken"),
@@ -52,7 +52,7 @@ export default function Navbar() {
                         <img src={logo} alt="" className="h-8" />
                     </Link>
                     <h1 className="text-xl font-semibold">arsync</h1>
-                    
+
                     {localStorage.getItem("accessToken") ? (
                         <div onClick={handleShowLogout} className="flex items-center gap-3 relative">
                             <p className="text-sm text-[var(--text-primary)] font-medium">{userData.login}</p>
