@@ -21,7 +21,7 @@ export default function AddNewProject() {
 
     const fetchData = async () => {
         try {
-            const repoData = await fetch('http://localhost:3000/all_repos', {
+            const repoData = await fetch('http://0.0.0.0:3000/all_repos', {
                 method: 'GET',
                 headers: {
                     username: localStorage.getItem("username"),

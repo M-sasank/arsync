@@ -225,7 +225,7 @@ function send_mail() {
 }
 
 // Start the server
-const port = process.env.PORT||3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on http://0.0.0.0:${port}`);
 });
