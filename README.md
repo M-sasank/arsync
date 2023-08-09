@@ -19,12 +19,12 @@ Before you try to run the code, you have to set the environment variables in you
 ```bash
 VITE_GITHUB_CLIENT_ID='YOUR_CLIENT_ID'
 VITE_GITHUB_CLIENT_SECRET='YOUR_CLIENT_SECRET'
-VITE_GITHUB_REDIRECT_URI='http://0.0.0.0:5173/'
+VITE_GITHUB_REDIRECT_URI='http://localhost:5173/'
 ```
 
-To run the code in your 0.0.0.0, you first have to run the server in your 0.0.0.0.
+To run the code in your localhost, you first have to run the server in your localhost.
 
-To run the server in your 0.0.0.0 run
+To run the server in your localhost run
 
 ```bash
   cd github-login
@@ -39,12 +39,12 @@ To run the frontend run
    npm run dev
 ```
 
-Congrats, The Application is running in your 0.0.0.0.
+Congrats, The Application is running in your localhost.
 
 To access the appliction go to 
 
 ```bash
-  0.0.0.0:5173
+  localhost:5173
 ```
 
 ## How to use

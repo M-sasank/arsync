@@ -34,7 +34,7 @@ const DeployForm = (props) => {
   const deployProject = async () => {
     setIsLoading(true);
     try {
-      const workflow = await fetch('http://0.0.0.0:3000/addWorkflow', {
+      const workflow = await fetch('http://localhost:3000/addWorkflow', {
         method: 'GET',
         headers: {
           username: localStorage.getItem("username"),
