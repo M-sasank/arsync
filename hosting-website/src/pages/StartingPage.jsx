@@ -1,25 +1,13 @@
 import image from '../assets/images/Asset-1.png';
 import '../styles/StartingPage.css';
 import { Link } from "react-router-dom";
-import Lottie from "react-lottie";
-import animation from '../assets/lottie/animation_ll15mgrx.json'
-import PopupModal from '../components/PopupModal';
 
 function StartingPage() {
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData : animation,
-    rendererSettings: {
-      preserveAspectRatio: "none",
-    },
- };
-
   return (
     <div className="App">
-      <div className='arsync'><img className='image' src={image} alt='Asset-2'/>
-      <h3 className='heading'>arsync</h3></div>
+      <div className='arsync'><img className='image' src={image} alt='Asset-2' />
+        <h3 className='heading'>arsync</h3></div>
 
       <p className='vercel'>arsync gives you the best user experience and fast deployment of websites with a single click.</p>
 
@@ -31,7 +19,6 @@ function StartingPage() {
         </Link>
 
         {/* <button className='GetDemo'>Get Demo</button> */}
-        <PopupModal/>
       </div>
 
       <div className='flex align-top gap-5 w-fit mx-auto mt-20'>
@@ -55,7 +42,7 @@ function StartingPage() {
           </div>
         </div>
       </div>
-      
+
       <div className='flex align-top gap-5 w-fit mx-auto'>
         <div className='mx-auto relative'>
           <div className="h-10 w-10 bg-[#603EAA] rounded-full grid place-content-center font-bold text-base text-[white]">3</div>
@@ -63,13 +50,6 @@ function StartingPage() {
             <p className='text-3xl font-bold'>Deploy 🎉</p>
             <p className='text-sm mt-1 text-[var(--text-primary)] text-[19px]'>Congrats, you have successfully deployed your website.</p>
           </div>
-        </div>
-      </div>
-
-      <div className='flex mt-[10rem]'>
-        <div className='w-[650px] text-left text-[19px]'>Welcome to arsync, your ultimate solution for effortless Continuous Integration and Continuous Deployment CI/CD of ardrive hosted websites. We understand the challenges that developers face when it comes to maintaining seamless updates and deployments for their ardrive-hosted projects . With ARSync, we've revolutionized the process, making it easier than ever to keep your websites up-to-date and running smoothly.</div>
-        <div className=''>
-          <Lottie options={defaultOptions} height={400} width={500} />
         </div>
       </div>
 
