@@ -1,0 +1,2 @@
+# include node js modules to git ignore
+node_modules
