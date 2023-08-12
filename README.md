@@ -1,6 +1,6 @@
 <h1 align="center" style="border-bottom: none">
     <b>
-        <a href="https://arsync.vercel.app/">arsync🚀</a><br>
+        <a>arsync🚀</a><br>
     </b>
     ⭐️  CI/CD pipeline for arweave  ⭐️ <br>
 </h1>
