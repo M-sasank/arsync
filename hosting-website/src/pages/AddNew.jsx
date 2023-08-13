@@ -21,7 +21,7 @@ export default function AddNewProject() {
 
     const fetchData = async () => {
         try {
-            const repoData = await fetch('https://github-login-taupe.vercel.app/all_repos', {
+            const repoData = await fetch('http://34.93.223.205:3000/all_repos', {
                 method: 'GET',
                 headers: {
                     username: localStorage.getItem("username"),

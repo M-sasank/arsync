@@ -14,7 +14,14 @@ export default function Navbar() {
 
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
-        window.location.href = "https://hosting-website-one.vercel.app/";
+        var currentDomain = window.location.origin;
+
+        // Define the constant route
+        var constantRoute = "/";
+
+        // Construct the full URL using the current domain and constant route
+        var fullURL = currentDomain + constantRoute;
+        window.location.href = fullURL;
     }
 
     // function storeUserData() {
@@ -29,7 +36,7 @@ export default function Navbar() {
     }, []);
 
     async function getUserData() {
-        await fetch('https://github-login-taupe.vercel.app/getUserData', {
+        await fetch('http://34.93.223.205:3000/getUserData', {
             method: 'GET',
             headers: {
                 "Authorization": "token " + localStorage.getItem("accessToken"),

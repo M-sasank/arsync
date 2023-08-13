@@ -4,15 +4,6 @@ import { useEffect, useState } from 'react';
 
 export default function Details() {
 
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animation,
-        rendererSettings: {
-            preserveAspectRatio: "none",
-        },
-    };
-
     const [data, setData] = useState({});
     const location = useLocation();
 

@@ -25,7 +25,7 @@ export default function HomePage() {
 
     const fetchData = async () => {
         try {
-            const repoData = await fetch('https://github-login-taupe.vercel.app/arsync_repos', {
+            const repoData = await fetch('http://34.93.223.205:3000/arsync_repos', {
                 method: 'GET',
                 headers: {
                     username: localStorage.getItem("username"),
@@ -55,7 +55,7 @@ export default function HomePage() {
 
         if (codeParam && (localStorage.getItem("accessToken") === null)) {
             async function getAccessToken() {
-                await fetch('https://github-login-taupe.vercel.app/getAccessToken?code=' + codeParam, {
+                await fetch('http://34.93.223.205:3000/getAccessToken?code=' + codeParam, {
                     method: 'GET',
                 }).then((response) => {
                     return response.json()
@@ -63,7 +63,14 @@ export default function HomePage() {
                     console.log(data);
                     if (data.access_token) {
                         localStorage.setItem("accessToken", data.access_token);
-                        window.location.href = "https://hosting-website-one.vercel.app/dashboard";
+                        var currentDomain = window.location.origin;
+
+                        // Define the constant route
+                        var constantRoute = "/dashboard";
+
+                        // Construct the full URL using the current domain and constant route
+                        var fullURL = currentDomain + constantRoute;
+                        window.location.href = fullURL;
                     }
                 })
             }
@@ -118,7 +125,6 @@ export default function HomePage() {
                         )}
                     </React.Fragment>
                 ))}
-                {/* {data[0] ? <DeployedProjectCard data={{ title: data[0].name, link: "placement-cell.bay.vercel.app", latestCommit: "updated something", lastUpdatedOn: "7days ago" }} /> : "Loading..."} */}
             </div>
         </>
     );
