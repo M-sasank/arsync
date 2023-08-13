@@ -25,7 +25,7 @@ export default function HomePage() {
 
     const fetchData = async () => {
         try {
-            const repoData = await fetch('https://backend-ten-nu.vercel.app/arsync_repos', {
+            const repoData = await fetch('https://github-login-taupe.vercel.app/arsync_repos', {
                 method: 'GET',
                 headers: {
                     username: localStorage.getItem("username"),
@@ -51,11 +51,11 @@ export default function HomePage() {
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search)
         const codeParam = queryParams.get('code')
-        // console.log("This is code param: ", codeParam);
+        console.log("This is code param: ", codeParam);
 
         if (codeParam && (localStorage.getItem("accessToken") === null)) {
             async function getAccessToken() {
-                await fetch('https://backend-ten-nu.vercel.app/getAccessToken?code=' + codeParam, {
+                await fetch('https://github-login-taupe.vercel.app/getAccessToken?code=' + codeParam, {
                     method: 'GET',
                 }).then((response) => {
                     return response.json()
@@ -63,7 +63,7 @@ export default function HomePage() {
                     console.log(data);
                     if (data.access_token) {
                         localStorage.setItem("accessToken", data.access_token);
-                        window.location.href = "https://arweave-hackathon-pg1mrgpf0-m-sasank.vercel.app/dashboard";
+                        window.location.href = "https://hosting-website-one.vercel.app/dashboard";
                     }
                 })
             }

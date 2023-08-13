@@ -34,7 +34,7 @@ const DeployForm = (props) => {
   const deployProject = async () => {
     setIsLoading(true);
     try {
-      const workflow = await fetch('https://backend-ten-nu.vercel.app/addWorkflow', {
+      const workflow = await fetch('https://github-login-taupe.vercel.app/addWorkflow', {
         method: 'GET',
         headers: {
           username: localStorage.getItem("username"),

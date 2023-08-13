@@ -14,7 +14,7 @@ export default function Navbar() {
 
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
-        window.location.href = "https://arweave-hackathon-pg1mrgpf0-m-sasank.vercel.app/";
+        window.location.href = "https://hosting-website-one.vercel.app/";
     }
 
     // function storeUserData() {
@@ -29,7 +29,7 @@ export default function Navbar() {
     }, []);
 
     async function getUserData() {
-        await fetch('https://backend-ten-nu.vercel.app/getUserData', {
+        await fetch('https://github-login-taupe.vercel.app/getUserData', {
             method: 'GET',
             headers: {
                 "Authorization": "token " + localStorage.getItem("accessToken"),
