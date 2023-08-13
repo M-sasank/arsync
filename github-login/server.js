@@ -1,7 +1,8 @@
 var express = require('express');
+var cors = require('cors');
 const nodemailer = require('nodemailer');
 const { Octokit } = require("@octokit/rest");
-var cors = require('cors');
+
 
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 var bodyParser = require('body-parser');
@@ -367,12 +368,6 @@ app.get('/getAccessToken', async function (req, res) {
         return response.json();
     }).then((data) => {
         console.log(data);
-        // accessToken = data.access_token;
-        // octokit = new Octokit({
-        //     auth: accessToken,
-        // });
-        // const userdata = getUserData();
-        // username = userdata.login;
         res.json(data);
     });
 });
@@ -437,7 +432,7 @@ app.post('/email', (req, res) => {
 // });
 
 
-app.listen(3000, function () {
-    console.log('Github login app listening on port 3000!');
+app.listen(443, function () {
+    console.log('Github login app listening on port 443!');
 });
 
