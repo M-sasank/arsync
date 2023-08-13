@@ -432,7 +432,7 @@ app.post('/email', (req, res) => {
 // });
 
 
-app.listen(443, function () {
-    console.log('Github login app listening on port 443!');
+app.listen(3000, function () {
+    console.log('Github login app listening on port 3000!');
 });
 
